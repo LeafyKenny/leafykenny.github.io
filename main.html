@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payslip Generator | Electrovers Corporation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="script.js"></script>
+    <script src="employeeselectquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="generate.js"></script>
+    <script type="module" src="./index.js"></script>
+
+</head>
+<body onload="populateDropdown()">
+    <div class="top-bar" id="topBar">
+        <img src="assets/icon-elv-circle.svg" width="40px" height="40px" class="logo"> <span class="company-name" id="companyName">Payslip Generator System</span>
+    </div>
+
+
+    <div class="container">
+        <p id="datetime"></p>
+        <script src=datetime.js></script>
+    </div>
+    
+    <div class="container">
+
+        <h1> <img src="logo.svg" width="40px" height="40px" class="logo"></img> Electrovers Corporation</h1>
+        <h3> Unit 3C ECCOI Corporate Center, 2 Santol Street, Saint Anthony Subdivision, Brgy. San Juan, Cainta, Rizal, Philippines 1900</h3>
+        <h3> (02) 8-526-6717 | info@electrovers.com | https://electrovers.com </h3>
+
+        <hr>
+
+        <h3>Payslip Issuer Information:</h3>
+        <h3>Name:</h3> 
+        <h3 id=issuer_name>0000000000000000</h3>
+
+        <h3>Position:</h3> 
+        <h3 id=issuer_name>0000000000000000</h3>
+
+        <h3>Issuer License Code:</h3> 
+        <h3 id=issuer_name>0000000000000000</h3>
+    </div>
+
+    
+    
+
+    <div class="container">
+        <h1>Employee Receipient</h1>
+        <hr>
+        <h3>Here is the employee you have selected to issue a payslip. If employee does not found click <a href="#">here</a> for a help.</h3>
+        
+        
+            
+
+            <table>
+                <tr>
+                    <th>Employee Data:</th>
+                    <th></th>
+                    <th>Insurances & Benefits:</th>
+                    <th></th>
+                    <th>Others:</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>Name: </td>
+                    <td>0000000000000000</td>
+                    <td>TIN: </td>
+                    <td>0000000000000000</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>Position: </td>
+                    <td>0000000000000000</td>
+                    <td>SSS: </td>
+                    <td>0000000000000000</tD>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>Employee Number: </td>
+                    <td>0000000000000000</td>
+                    <td>PAGIBIG: </td>
+                    <td>0000000000000000</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>EPS Number: </td>
+                    <td>0000000000000000</td>
+                    <td>PHILHEALTH: </td>
+                    <td>0000000000000000</td>
+                    <td> </td>
+                </tr>
+            </table>
+            
+            <button class="redbutton" onclick="openDialog()">Choose Employee</button>
+            <button class="redbutton" id="viewButton">View JSON</button>
+
+            <dialog id="dialog" class="dialog">
+                
+                <p>Choose Employee to Issue</p>
+                <label for="employeeSelect">Select Employee:</label>
+      
+              
+
+                        <div class="dropdown">
+                            <select name="employeeSelect" id="employeeselection" >
+                                <option value="">Select an employee</option>
+                                
+                                </select>
+                                </div>
+
+                       
+                   
+                    <label></label>
+                    <button type="whitebutton">Confirm</button>
+                    <button class="blackbutton" onclick="closeDialog()">Close</button>
+
+                    
+                    
+            </dialog>
+
+        
+    </div>
+
+    <form id="payslipForm">
+        <div class="container">
+
+            <h1><img src="assets/icon-payslip.png" class="interfacelogo"></img> Issue Payslip</h1>
+            <hr>
+            <h3>Fill out the necessary deliverable for the employee you have selected.</h3>
+
+            <div class="container">
+                    
+                <h2>Earnings: Taxable</h2>
+                <h3>Enter the employee's taxable gross earnings here.</h3>
+        
+                <h3 class="subheader">Basic Salary</h3>
+        
+                <label>Salary Class: </label>
+                <div class="dropdown">
+                    <select id="salaryClass">
+                        <option value="rate_ncr">National Capital Region Rate (₱610.00)</option>
+                        <option value="rate_r4a">Region 4A Rate (₱510.00)</option>
+                    </select>
+                </div>
+        
+                <label>Employee Class: </label>
+                <div class="dropdown">
+                    <select id="employeeClass">
+                        <option value="class_adminemployee">Admin Employees (+ ₱200.00)</option>
+                        <option value="class_regularemployee">Regular Employees (+ ₱300.00)</option>
+                    </select>
+                </div>
+        
+                <label>Computed Daily Wage: </label>
+                <h3 id="salarybasedailycomputed">₱ 0.00</h3>
+        
+                <div class="input-container">
+                    <label for="earnings-tax-bpay">Days Present: </label>
+                    <input type="number" id="daysPresent" oninput="calculateSalary()" placeholder="Enter Days Present Here...">
+                </div>
+        
+                <label>Basic Salary Total:</label>
+                <div><p id="earnings-tax-bpay-total" class="subtotaldel">₱ 0.00</p></div>
+            
+                    <h3 class="subheader"> ** REG-ND Configuration ** </h3>
+        
+                    <hr>
+                    <div class="input-container">
+                        <label for="earnings-tax-regnd">REG-ND Base: </label>
+                        <input type="number" id="earnings-tax-regnd-base" oninput="formatCurrency(amount)" placeholder="Enter Amount Here...">
+                    
+                        <p><label for="earnings-tax-regnd">REG-ND Hours: </label>
+                        <input type="number" id="earnings-tax-regnd-hrs" placeholder="Enter Hours Here...">
+                        
+                        <script src="compensation.js"></script>
+                        <label>REG-ND Total:</label>
+                        <div><p id="earnings-tax-regnd-total" class="subtotaldel">₱ 0.00</p></div>
+                    </div>
+        
+                    <hr>
+
+                    <h3 class="subheader"> ** REG-OT Configuration ** </h3>
+
+                    <div class="input-container">
+                        <label for="earnings-tax-regot">REG-OT Base: </label>
+                        <input type="number" id="earnings-tax-regot-base" oninput="formatCurrency(amount)" placeholder="Enter Amount Here...">
+                    
+                        <label for="earnings-tax-ot">REG-OT Hours: </label>
+                        <input type="number" id="earnings-tax-regot-hrs" placeholder="Enter Hours Here...">
+                        
+                        <script src="compensation.js"></script>
+                        <label>REG-OT Total:</label>
+                        <div><p id="earnings-tax-regot-total" class="subtotaldel">₱ 0.00</p></div>
+                    </div>
+
+                    <hr>
+
+                    <h3 class="subheader"> ** ROT-ND Configuration ** </h3>
+
+                    <div class="input-container">
+                        <label for="earnings-tax-rotnd">ROT-ND Base: </label>
+                        <input type="number" id="earnings-tax-rotnd-base" oninput="formatCurrency(amount)" placeholder="Enter Amount Here...">
+                    
+                        <label for="earnings-tax-ot">ROT-ND Hours: </label>
+                        <input type="number" id="earnings-tax-rotnd-hrs" placeholder="Enter Hours Here...">
+                        
+                        <script src="compensation.js"></script>
+                        <label>ROT-ND Total:</label>
+                        <div><p id="earnings-tax-rotnd-total" class="subtotaldel">₱ 0.00</p></div>
+                    </div>
+
+                    <h3 class="subheader"> ** SH-ND Configuration ** </h3>
+
+                    <div class="input-container">
+                        <label for="earnings-tax-shnd">SH-ND Base: </label>
+                        <input type="number" id="earnings-tax-shnd-base" oninput="formatCurrency(amount)" placeholder="Enter Amount Here...">
+                    
+                        <label for="earnings-tax-ot">SH-ND Hours: </label>
+                        <input type="number" id="earnings-tax-shnd-hrs" placeholder="Enter Hours Here...">
+                        
+                        <script src="compensation.js"></script>
+                        <label>SH-ND Total:</label>
+                        <div><p id="earnings-tax-shnd-total" class="subtotaldel">₱ 0.00</p></div>
+                    </div>
+
+                    <h3 class="subheader"> ** Taxable Hazard Pay ** </h3>
+
+                    <div class="input-container">
+                        <label for="earnings-tax-haz">Hazard Pay Base: </label>
+                        <input type="number" id="earnings-tax-haz-base" oninput="formatCurrency(amount)" placeholder="Enter Amount Here...">
+                                    
+                        <script src="compensation.js"></script>
+                        <label>Hazard Pay Total:</label>
+                        <div><p id="earnings-tax-haz-total" class="subtotaldel">₱ 0.00</p></div>
+                    </div>
+                
+                
+            </div>
+                
+            <div class="container">
+
+                    <h2>Earnings: Non-Taxable</h2>
+                    <h3>Enter the employee's non-taxable gross earnings here.</h3>
+                    
+                    <h3 class="subheader"> ** Clothing and Laundry ** </h3>
+
+                        <div class="input-container">
+                            <label for="earnings-notax-cloth-base">Amount Base: </label>
+                            <input type="number" id="earnings-notax-cloth-base" oninput="formatCurrency(amount)" placeholder="Enter Amount Here...">
+                            
+
+
+                            <script src="compensation.js"></script>
+                            <label>Amount Total:</label>
+                            <div><p id="earnings-notax-cloth-total" class="subtotaldel">₱ 0.00</p></div>
+
+                        </div>
+
+                    <h3 class="subheader"> ** Allowance ** </h3>
+
+                        <div class="input-container">
+                            <label for="earnings-notax-allowance-base">Amount Base: </label>
+                            <input type="number" id="earnings-notax-allowance-base" oninput="formatCurrency(amount)" placeholder="Enter Amount Here...">
+                            
+        
+        
+                            <script src="compensation.js"></script>
+                            <label>Amount Total:</label>
+                            <div><p id="earnings-notax-allowance-total" class="subtotaldel">₱ 0.00</p></div>
+                        
+                        </div>
+
+                        
+                    <h3 class="subheader"> ** Rice Allowance ** </h3>
+
+                        <div class="input-container">
+                            <label for="earnings-notax-riceallowance-base">Amount Base: </label>
+                            <input type="number" id="earnings-notax-riceallowance-base" oninput="formatCurrency(amount)" placeholder="Enter Amount Here...">
+                            
+        
+        
+                            <script src="compensation.js"></script>
+                            <label>Amount Total:</label>
+                            <div><p id="earnings-notax-riceallowance-total" class="subtotaldel">₱ 0.00</p></div>
+                        
+                        </div>
+                            
+                    <h3 class="subheader"> ** Rice Allowance ** </h3>
+
+                        <div class="input-container">
+                            <label for="earnings-notax-riceallowance-base">Amount Base: </label>
+                            <input type="number" id="earnings-notax-riceallowance-base" oninput="formatCurrency(amount)" placeholder="Enter Amount Here...">
+                            
+        
+        
+                            <script src="compensation.js"></script>
+                            <label>Amount Total:</label>
+                            <div><p id="earnings-notax-riceallowance-total" class="subtotaldel">₱ 0.00</p></div>
+                            
+                        </div> 
+                
+            </div>
+
+            <div class="container">
+
+                <h2>Earnings: Deductions</h2>
+                <h3>Enter the employee's non-taxable gross earnings here.</h3>
+                
+                <h3 class="subheader"> ** Clothing and Laundry ** </h3>
+
+                    <div class="input-container">
+                        <label for="earnings-notax-cloth-base">Amount Base: </label>
+                        <input type="number" id="earnings-notax-cloth-base" oninput="formatCurrency(amount)" placeholder="Enter Amount Here...">
+                        
+
+
+                        <script src="compensation.js"></script>
+                        <label>Amount Total:</label>
+                        <div><p id="earnings-notax-cloth-total" class="subtotaldel">₱ 0.00</p></div>
+
+                    </div>
+
+                <h3 class="subheader"> ** Allowance ** </h3>
+
+                        <div class="input-container">
+                            <label for="earnings-notax-allowance-base">Amount Base: </label>
+                            <input type="number" id="earnings-notax-allowance-base" oninput="formatCurrency(amount)" placeholder="Enter Amount Here...">
+                            
+
+
+                            <script src="compensation.js"></script>
+                            <label>Amount Total:</label>
+                            <div><p id="earnings-notax-allowance-total" class="subtotaldel">₱ 0.00</p></div>
+
+                            </div>
+
+                    
+                <h3 class="subheader"> ** Rice Allowance ** </h3>
+
+                        <div class="input-container">
+                            <label for="earnings-notax-riceallowance-base">Amount Base: </label>
+                            <input type="number" id="earnings-notax-riceallowance-base" oninput="formatCurrency(amount)" placeholder="Enter Amount Here...">
+                            
+
+
+                            <script src="compensation.js"></script>
+                            <label>Amount Total:</label>
+                            <div><p id="earnings-notax-riceallowance-total" class="subtotaldel">₱ 0.00</p></div>
+
+                            </div>
+
+                        
+                <h3 class="subheader"> ** Rice Allowance ** </h3>
+
+                        <div class="input-container">
+                            <label for="earnings-notax-riceallowance-base">Amount Base: </label>
+                            <input type="number" id="earnings-notax-riceallowance-base" oninput="formatCurrency(amount)" placeholder="Enter Amount Here...">
+                            
+
+
+                            <script src="compensation.js"></script>
+                            <label>Amount Total:</label>
+                            <div><p id="earnings-notax-riceallowance-total" class="subtotaldel">₱ 0.00</p></div>
+
+                            </div>
+                        
+            </div> 
+
+            <button class="redbutton" onclick="openPreviewWindow()" id="generatePdf">Generate & Preview</button>
+
+            <button class="button" onclick="resetFields(event)">Export as Spreadsheet</button>
+            
+            <button class="blackbutton" onclick="resetConfirm(event)">Reset</button>
+        
+            
+        </div>
+            
+            
+        </div>
+
+            
+
+            <dialog id="resetdialog" class="resetdwwialog">
+
+                <p>Do you want to proceed to reset your entry?</p>
+
+                <script src="script.js"></script>
+                <button class="button" onclick="resetFields(event)">Confirm</button></div>
+                <button class="blackbutton" onclick="resetConfirmClose(event)">Cancel</button></div>
+
+            </dialog>
+        </div>
+    </form> 
+
+
+           
+    <div>
+        
+        
+    </body> 
+        
+</body>
+
+
+
+   
+
+<script>
+   function generatePayslip() {
+        const employeeName = document.getElementById('employeeName').value;
+        const salary = document.getElementById('salary').value;
+
+        // Create a new jsPDF instance
+        const pdf = new jsPDF();
+
+        // Add content to the PDF
+        pdf.text(20, 20, 'Payslip');
+        pdf.text(20, 30, `Employee Name: ${employeeName}`);
+        pdf.text(20, 40, `Salary: $${salary}`);
+
+        // Save the PDF
+        pdf.save('payslip.pdf');
+   }
+</script>
+
+
+Copyright Electrovers Corporation 2023
+</html>
+
+

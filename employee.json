@@ -1,0 +1,44 @@
+{
+    "employee": [
+        {
+            "name": "VENTI, THE BARD",
+            "employee_id": "EEEE-001",
+            "epsn": "24e27b05-234d-4521-a418-f3e42484c57d",
+            "position": "ANEMO ARCHON",
+            "tin": "1234567890",
+            "sss": "1234567890",
+            "pagibig": "1234567890",
+            "philhealth": "1234567890"
+        },
+        {
+            "name": "PAIMON, FOOD",
+            "employee_id": "EEEE-002",
+            "epsn": "24e27b05-234d-4521-a418-f3e42484c57b",
+            "position": "EMERGENCY FOOD",
+            "tin": "1234567890",
+            "sss": "1234567890",
+            "pagibig": "1234567890",
+            "philhealth": "1234567890"
+        },
+        {
+            "name": "FUCALORS, FURINA",
+            "employee_id": "EEEE-003",
+            "epsn": "24e27b05-234d-4521-a418-f3e42484c57f",
+            "position": "HYDRO ARCHON",
+            "tin": "1234567890",
+            "sss": "1234567890",
+            "pagibig": "1234567890",
+            "philhealth": "1234567890"
+        },
+        {
+            "name": "ALVARADO, MAR ANTONIO",
+            "employee_id": "EABO-001",
+            "epsn": "00",
+            "position": "LIASON OFFICER",
+            "tin": "137228812",
+            "sss": "3304766869",
+            "pagibig": "109002988295",
+            "philhealth": "190892469273"
+        }
+    ]
+}

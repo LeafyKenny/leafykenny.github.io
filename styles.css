@@ -1,0 +1,280 @@
+/* font-family: HYWenHei-85W; */
+
+body {
+    font-family: Space Grotesk;
+    margin: 0;
+    padding: 0;
+}
+
+
+hr {
+    color: rgb(120, 29, 27);
+}
+
+h1 {
+    color: rgb(120, 29, 27);
+    
+}
+
+h3 {
+    font-size: small;
+    font-weight: lighter;
+}
+
+label {
+    font-size: small;
+}
+
+input {
+    font-family: Space Grotesk;
+    font-size: small;
+}
+
+
+.redbutton {
+    background-color: rgb(120, 29, 27);
+    font-family: 'Space Grotesk';
+    font-size: 13px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.whitebutton {
+    background-color: white;
+    font-family: 'Space Grotesk';
+    font-size: 13px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.blackbutton {
+    padding: 10px 20px;
+    background-color:  rgb(30, 30, 30);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Space Grotesk';
+    font-size: 13px;
+}
+
+.dialog, .resetdialog{
+        width: 300px;
+        background-color: #f0f0f0;
+        padding: 50px 100px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        
+}
+
+
+.top-bar {
+    background-color: rgb(120, 29, 27);
+    color: white;
+    text-align: left;
+    padding: 10px;
+}
+
+.container {
+    max-width: 95%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.containerlogin {
+    max-width: 30%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    grid-template-rows: repeat(3, 1fr);
+    position: static;
+    align-items: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    align-content: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color:  rgb(120, 29, 27);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Space Grotesk';
+    font-size: 13px;
+}
+
+/* Add styles for the font select dropdown */
+#font_select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.company-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.footerContent {
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.footerContainer {
+    width: 100%;
+}
+
+.disclaimer, .copyright {
+    font-size: 12px;
+    margin: 5px;
+}
+
+.row {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: left;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Remove spacing between table cells */
+    text-align: left;
+    font-size: small;
+    font-weight: lighter;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px; /* Add some spacing between input groups */
+}
+
+.input-group label, .input-group input {
+    /* Align elements within the input group horizontally */
+    display: flex;
+    justify-content: center;
+}
+
+.input-group label {
+    width: 100px; /* Adjust the width of labels as needed */
+}
+
+.input-group input {
+    flex: 1; /* Allow input to fill available space */
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.interfacelogo {
+    width: 45px;
+    height: 45px;
+    top: 10px;
+    position: relative;
+   
+}
+
+.logo {
+    margin: 3px;
+    margin-left: 15px;
+}
+
+.company-name {
+    font-size: 18px;
+    font-weight: bold;
+    justify-content: center;
+    left: 20px;
+    top: -15px;
+    position: relative;
+}
+
+.backgroundimage {
+    background-image: url("/assets/assetbg.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+}
+
+.subheader {
+    background-color: rgb(120, 29, 27);
+    color: white;
+    margin-top: -1px, 1px ;
+    border-radius: 8px;
+    height: 40px;
+    text-indent: 15px;
+    position: relative;
+    line-height: 40px;
+
+}
+
+.subtotaldel {
+    background-color: rgb(167, 150, 0);
+    color: black;
+    border-radius: 4px;
+    height: 30px;
+    line-height: 20px;
+    text-indent: 6px;
+}
+
+
+.dropdown select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    width: 100%;
+    outline: none;
+    font-family: 'Space Grotesk';
+}
+
+/* Style individual options */
+.dropdown select option {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Change color of options on hover */
+.dropdown select option:hover {
+    background-color: rgb(120, 29, 27);
+    color: #fff;
+}
+
+input {
+    width: 99%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Add more styles for other input types if needed */
